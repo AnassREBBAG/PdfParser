@@ -19,7 +19,9 @@ public class Main {
     static Question group ;
 
     public static void main(String[] args) {
-        String filePath = "src\\main\\resources\\Test_PDF_Extractor3.pdf";
+        //String filePath = "src/main/resources/Test_PDF_Extractor3.pdf";
+        String filePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "Test_PDF_Extractor3.pdf";
+
         ArrayList<Question> questions = new ArrayList<>();
 
         try (PDDocument document = PDDocument.load(new File(filePath))) {

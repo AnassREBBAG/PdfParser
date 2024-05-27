@@ -78,15 +78,15 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" +
-                "questionText='" + this.questionText + '\'' +
-                ", optionA='" + this.optionA + '\'' +
-                ", optionB='" + this.optionB + '\'' +
-                ", optionC='" + this.optionC + '\'' +
-                ", optionD='" + this.optionD + '\'' +
-                ", optionE='" + this.optionE + '\'' +
-                ", optionF='" + this.optionF + '\'' +
-                ", correctAnswer='" + this.correctAnswer + '\'' +
-                '}';
+        return "Question{" + '\n' +
+                "questionText='" + this.questionText + '\'' + '\n' +
+                ", optionA='" + this.optionA + '\'' + '\n' +
+                ", optionB='" + this.optionB + '\'' +'\n' +
+                ", optionC='" + this.optionC + '\'' +'\n' +
+                ", optionD='" + this.optionD + '\'' +'\n' +
+                ", optionE='" + this.optionE + '\'' +'\n' +
+                ", optionF='" + this.optionF + '\'' +'\n' +
+                ", correctAnswer='" + this.correctAnswer + '\'' +'\n' +
+                '}' + '\n' ;
     }
 }
