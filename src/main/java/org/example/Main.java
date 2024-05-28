@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
         String filePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator
-                + "Test_PDF_Extractor3.pdf";
+                + "Test_PDF_Extractor.pdf";
 
         ArrayList<Question> questions = new ArrayList<>();
 
@@ -53,47 +53,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        writeQuestionsToExcel(questions);
+        Writer.writeQuestionsToExcel(questions);
         System.out.println("#################################");
     }
 
-    private static void writeQuestionsToExcel(ArrayList<Question> questions) {
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Questions");
-
-        int rowCount = 0;
-
-        // Create header row
-        Row headerRow = sheet.createRow(rowCount++);
-        headerRow.createCell(0).setCellValue("Question");
-        headerRow.createCell(1).setCellValue("Option A");
-        headerRow.createCell(2).setCellValue("Option B");
-        headerRow.createCell(3).setCellValue("Option C");
-        headerRow.createCell(4).setCellValue("Option D");
-        headerRow.createCell(5).setCellValue("Correct Answer");
-
-        // Populate rows with question data
-        for (Question question : questions) {
-            Row row = sheet.createRow(rowCount++);
-            row.createCell(0).setCellValue(question.questionText);
-            row.createCell(1).setCellValue(question.optionA);
-            row.createCell(2).setCellValue(question.optionB);
-            row.createCell(3).setCellValue(question.optionC);
-            row.createCell(4).setCellValue(question.optionD);
-            row.createCell(5).setCellValue(question.correctAnswer);
-        }
-
-        try (FileOutputStream outputStream = new FileOutputStream("Questions.xlsx")) {
-            workbook.write(outputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Close the workbook
-        try {
-            workbook.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
 }
