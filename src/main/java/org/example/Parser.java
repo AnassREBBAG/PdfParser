@@ -2,10 +2,12 @@ package org.example;
 
 public class Parser {
 
-    public static boolean findQuestion(String paragraph) {
+    public static boolean isQuestion(String paragraph) {
 
         String[] wordList = paragraph.split(" ");
 
+        if (wordList.length <= 0)
+            return false;
         // System.out.println("-> " + wordList[0]);
         if (wordList[0].equals("Question"))
             return true;
@@ -14,17 +16,6 @@ public class Parser {
     }
 
     public static String extractQuestion(String paragraph) {
-
-        // StringBuilder question = new StringBuilder();
-        //
-        // String[] wordList = paragraph.split(" ");
-        //
-        //
-        // for (int i = 0; i < wordList.length ; i++) {
-        // question.append(wordList[i] + " ");
-        // }
-        //
-        // return question.toString();
 
         return paragraph;
     }
@@ -36,7 +27,27 @@ public class Parser {
     }
 
     public static String extractCorrectAnswer(String paragraph) {
+        if (paragraph.length() <= 13)
+            return " ";
+
         return paragraph.substring(15);
     }
 
+    public static boolean isOption(String paragraph, char c) {
+
+        if (paragraph.length() <= 2)
+            return false;
+        if (paragraph.charAt(0) == c)
+            return true;
+        return false;
+
+    }
+
+    public static boolean isCorrectAnswer(String paragraph) {
+        if (paragraph.length() < 14)
+            return false;
+        if (paragraph.substring(0, 13).equals("Correct Answer"))
+            return true;
+        return false;
+    }
 }

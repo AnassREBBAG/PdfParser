@@ -2,21 +2,11 @@ package org.example;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-
-    public static boolean questionFound, optionAFound, OptionBFound, optionCFound,
-            optionDFound, optionEFound, correctAnswerFound;
-
 
     public static void main(String[] args) {
         String filePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator
@@ -30,24 +20,80 @@ public class Main {
 
             String[] paragraphList = text.split("\n");
 
+            // System.out.println(paragraphList.length);
             int i = 0;
 
             while (i < paragraphList.length) {
 
-                if (Parser.findQuestion(paragraphList[i])) {
+                if (Parser.isQuestion(paragraphList[i])) {
 
                     Question group = new Question();
-                    group.questionText = Parser.extractQuestion(paragraphList[i + 1]);
-                    group.optionA = Parser.extractQuestion(paragraphList[i + 2]);
-                    group.optionB = Parser.extractQuestion(paragraphList[i + 3]);
-                    group.optionC = Parser.extractQuestion(paragraphList[i + 4]);
-                    group.optionD = Parser.extractQuestion(paragraphList[i + 5]);
-                    group.correctAnswer = Parser.extractCorrectAnswer(paragraphList[i + 6]);
+                    StringBuilder questionTextBuilder = new StringBuilder();
+                    i++;
 
-                    questions.add(group);
+                    try {
 
+                        questionTextBuilder.append(" " + Parser.extractQuestion(paragraphList[i]));
+
+                        // i++;
+
+                        while (true) {
+                            if (!(Parser.isOption(paragraphList[i], 'A'))
+                                    && !(Parser.isCorrectAnswer(paragraphList[i]))) {
+                                questionTextBuilder.append(" " + paragraphList[i]);
+                                i++;
+                            }
+
+                            if (Parser.isCorrectAnswer(paragraphList[i])) {
+                                group.correctAnswer = Parser.extractCorrectAnswer(paragraphList[i]);
+                                i++;
+
+                                break;
+                            }
+
+                            if (Parser.isOption(paragraphList[i], 'A')) {
+                                group.optionA = Parser.extractOption(paragraphList[i]);
+                                i++;
+                            }
+                            if (Parser.isOption(paragraphList[i], 'B')) {
+                                group.optionB = Parser.extractOption(paragraphList[i]);
+                                i++;
+                            }
+                            if (Parser.isOption(paragraphList[i], 'C')) {
+                                group.optionC = Parser.extractOption(paragraphList[i]);
+                                i++;
+                            }
+                            if (Parser.isOption(paragraphList[i], 'D')) {
+                                group.optionD = Parser.extractOption(paragraphList[i]);
+                                i++;
+                            }
+                            if (Parser.isOption(paragraphList[i], 'E')) {
+                                group.optionE = Parser.extractOption(paragraphList[i]);
+                                i++;
+                            }
+
+                        }
+
+                        group.questionText = questionTextBuilder.toString();
+                        questions.add(group);
+
+                        // group.optionA = Parser.extractOption(paragraphList[i]);
+                        // group.optionB = Parser.extractOption(paragraphList[i]);
+                        // group.optionC = Parser.extractOption(paragraphList[i]);
+                        // group.optionD = Parser.extractOption(paragraphList[i]);
+                        // group.correctAnswer = Parser.extractCorrectAnswer(paragraphList[i + 6]);
+
+                        // questions.add(group);
+                    }
+
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Not enough elements remaining in the array to process a complete question");
+                        e.printStackTrace();
+                    }
                 }
-                i++;
+
+                else
+                    i++;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,6 +102,4 @@ public class Main {
         Writer.writeQuestionsToExcel(questions);
         System.out.println("#################################");
     }
-
-    
 }
