@@ -14,92 +14,74 @@ public class Main {
 
         ArrayList<Question> questions = new ArrayList<>();
 
-        try (PDDocument document = PDDocument.load(new File(filePath))) {
-            PDFTextStripper pdfStripper = new PDFTextStripper();
-            String text = pdfStripper.getText(document);
-
-            String[] paragraphList = text.split("\n");
-
-            // System.out.println(paragraphList.length);
-            int i = 0;
-
-            while (i < paragraphList.length) {
-
-                if (Parser.isQuestion(paragraphList[i])) {
-
-                    Question group = new Question();
-                    StringBuilder questionTextBuilder = new StringBuilder();
-                    i++;
-
-                    try {
-
-                        questionTextBuilder.append(" " + Parser.extractQuestion(paragraphList[i]));
-
-                        // i++;
-
-                        while (true) {
-                            if (!(Parser.isOption(paragraphList[i], 'A'))
-                                    && !(Parser.isCorrectAnswer(paragraphList[i]))) {
-                                questionTextBuilder.append(" " + paragraphList[i]);
-                                i++;
-                            }
-
-                            if (Parser.isCorrectAnswer(paragraphList[i])) {
-                                group.correctAnswer = Parser.extractCorrectAnswer(paragraphList[i]);
-                                i++;
-
-                                break;
-                            }
-
-                            if (Parser.isOption(paragraphList[i], 'A')) {
-                                group.optionA = Parser.extractOption(paragraphList[i]);
-                                i++;
-                            }
-                            if (Parser.isOption(paragraphList[i], 'B')) {
-                                group.optionB = Parser.extractOption(paragraphList[i]);
-                                i++;
-                            }
-                            if (Parser.isOption(paragraphList[i], 'C')) {
-                                group.optionC = Parser.extractOption(paragraphList[i]);
-                                i++;
-                            }
-                            if (Parser.isOption(paragraphList[i], 'D')) {
-                                group.optionD = Parser.extractOption(paragraphList[i]);
-                                i++;
-                            }
-                            if (Parser.isOption(paragraphList[i], 'E')) {
-                                group.optionE = Parser.extractOption(paragraphList[i]);
-                                i++;
-                            }
-
-                        }
-
-                        group.questionText = questionTextBuilder.toString();
-                        questions.add(group);
-
-                        // group.optionA = Parser.extractOption(paragraphList[i]);
-                        // group.optionB = Parser.extractOption(paragraphList[i]);
-                        // group.optionC = Parser.extractOption(paragraphList[i]);
-                        // group.optionD = Parser.extractOption(paragraphList[i]);
-                        // group.correctAnswer = Parser.extractCorrectAnswer(paragraphList[i + 6]);
-
-                        // questions.add(group);
-                    }
-
-                    catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Not enough elements remaining in the array to process a complete question");
-                        e.printStackTrace();
-                    }
-                }
-
-                else
-                    i++;
-            }
+        try {
+            questions = parsePDF(filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         Writer.writeQuestionsToExcel(questions);
-        System.out.println("#################################");
+        System.out.println("Questions successfully written to Excel file.");
+    }
+
+    public static ArrayList<Question> parsePDF(String filePath) throws IOException {
+        ArrayList<Question> questions = new ArrayList<>();
+
+        try (PDDocument document = PDDocument.load(new File(filePath))) {
+            PDFTextStripper pdfStripper = new PDFTextStripper();
+            String text = pdfStripper.getText(document);
+
+            String[] paragraphList = text.split("\n");
+            int i = 0;
+
+            while (i < paragraphList.length) {
+                if (Parser.isQuestion(paragraphList[i])) {
+                    Question question = extractQuestion(paragraphList, i);
+                    if (question != null) {
+                        questions.add(question);
+                    }
+                }
+                i++;
+            }
+        }
+
+        return questions;
+    }
+
+    private static Question extractQuestion(String[] paragraphList, int index) {
+        Question question = new Question();
+        StringBuilder questionTextBuilder = new StringBuilder();
+        int i = index + 1;
+
+        try {
+            while (i < paragraphList.length && !Parser.isCorrectAnswer(paragraphList[i])) {
+                if (Parser.isOption(paragraphList[i], 'A')) {
+                    question.optionA = Parser.extractOption(paragraphList[i]);
+                } else if (Parser.isOption(paragraphList[i], 'B')) {
+                    question.optionB = Parser.extractOption(paragraphList[i]);
+                } else if (Parser.isOption(paragraphList[i], 'C')) {
+                    question.optionC = Parser.extractOption(paragraphList[i]);
+                } else if (Parser.isOption(paragraphList[i], 'D')) {
+                    question.optionD = Parser.extractOption(paragraphList[i]);
+                } else if (Parser.isOption(paragraphList[i], 'E')) {
+                    question.optionE = Parser.extractOption(paragraphList[i]);
+                } else {
+                    questionTextBuilder.append(" ").append(paragraphList[i]);
+                }
+                i++;
+            }
+
+            if (i < paragraphList.length && Parser.isCorrectAnswer(paragraphList[i])) {
+                question.correctAnswer = Parser.extractCorrectAnswer(paragraphList[i]);
+            }
+
+            question.questionText = questionTextBuilder.toString().trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Not enough elements remaining in the array to process a complete question");
+            e.printStackTrace();
+            return null;
+        }
+
+        return question;
     }
 }

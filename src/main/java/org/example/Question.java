@@ -6,34 +6,29 @@ public class Question {
     public String optionC;
     public String optionD;
     public String optionE;
-    public String optionF;
     public String correctAnswer;
     public String questionText;
 
     public Question() {
-
-        this.questionText = " ";
-        this.optionA = " ";
-        this.optionB = " ";
-        this.optionC = " ";
-        this.optionD = " ";
-        this.optionE = " ";
-        this.optionF = " ";
-        this.correctAnswer = " ";
-
+        this.questionText = "";
+        this.optionA = "";
+        this.optionB = "";
+        this.optionC = "";
+        this.optionD = "";
+        this.optionE = "";
+        this.correctAnswer = "";
     }
 
     @Override
     public String toString() {
         return "Question{" + '\n' +
-                "questionText='" + this.questionText + '\'' + '\n' +
-                "optionA='" + this.optionA + '\'' + '\n' +
-                "optionB='" + this.optionB + '\'' + '\n' +
-                "optionC='" + this.optionC + '\'' + '\n' +
-                "optionD='" + this.optionD + '\'' + '\n' +
-                "optionE='" + this.optionE + '\'' + '\n' +
-                "optionF='" + this.optionF + '\'' + '\n' +
-                "correctAnswer='" + this.correctAnswer + '\'' + '\n' +
+                "questionText='" + questionText + '\'' + '\n' +
+                "optionA='" + optionA + '\'' + '\n' +
+                "optionB='" + optionB + '\'' + '\n' +
+                "optionC='" + optionC + '\'' + '\n' +
+                "optionD='" + optionD + '\'' + '\n' +
+                "optionE='" + optionE + '\'' + '\n' +
+                "correctAnswer='" + correctAnswer + '\'' + '\n' +
                 '}' + '\n';
     }
 }
