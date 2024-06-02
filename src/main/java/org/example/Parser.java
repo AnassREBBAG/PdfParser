@@ -3,12 +3,11 @@ package org.example;
 public class Parser {
 
     public static boolean isQuestion(String paragraph) {
-        String[] wordList = paragraph.split(" ");
-        return wordList.length > 0 && wordList[0].equals("Question");
+        return paragraph.trim().startsWith("Question");
     }
 
     public static String extractQuestion(String paragraph) {
-        return paragraph;
+        return paragraph.trim();
     }
 
     public static String extractOption(String paragraph) {
@@ -20,10 +19,10 @@ public class Parser {
     }
 
     public static boolean isOption(String paragraph, char c) {
-        return paragraph.length() > 1 && paragraph.charAt(0) == c && paragraph.charAt(1) == ')';
+        return paragraph.trim().startsWith(c + ".");
     }
 
     public static boolean isCorrectAnswer(String paragraph) {
-        return paragraph.length() >= 14 && paragraph.startsWith("Correct Answer");
+        return paragraph.trim().startsWith("Correct Answer");
     }
 }

@@ -6,6 +6,7 @@ public class Question {
     public String optionC;
     public String optionD;
     public String optionE;
+    public String optionF;
     public String correctAnswer;
     public String questionText;
 
@@ -16,6 +17,7 @@ public class Question {
         this.optionC = "";
         this.optionD = "";
         this.optionE = "";
+        this.optionF = "";
         this.correctAnswer = "";
     }
 
@@ -28,6 +30,7 @@ public class Question {
                 "optionC='" + optionC + '\'' + '\n' +
                 "optionD='" + optionD + '\'' + '\n' +
                 "optionE='" + optionE + '\'' + '\n' +
+                "optionE='" + optionF + '\'' + '\n' +
                 "correctAnswer='" + correctAnswer + '\'' + '\n' +
                 '}' + '\n';
     }

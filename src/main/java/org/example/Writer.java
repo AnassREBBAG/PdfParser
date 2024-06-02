@@ -24,7 +24,8 @@ public class Writer {
             row.createCell(3).setCellValue(question.optionC);
             row.createCell(4).setCellValue(question.optionD);
             row.createCell(5).setCellValue(question.optionE);
-            row.createCell(6).setCellValue(question.correctAnswer);
+            row.createCell(6).setCellValue(question.optionF);
+            row.createCell(7).setCellValue(question.correctAnswer);
         }
 
         try (FileOutputStream fileOut = new FileOutputStream("questions.xlsx")) {
