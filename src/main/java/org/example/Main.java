@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        String filePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "Test_PDF_Extractor.pdf";
+        String filePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "GCP-229ques.pdf";
 
         ArrayList<Question> questions = new ArrayList<>();
 
@@ -30,12 +30,77 @@ public class Main {
             PDFTextStripper pdfStripper = new PDFTextStripper();
             String text = pdfStripper.getText(document);
 
+
+            //System.out.println(text);
+
+
             String[] paragraphList = text.split("\n");
+
+            //for(int i=0; i < paragraphList.length; i++)
+              //  System.out.println(i + "  " + paragraphList[i]);
+
             int i = 0;
 
+            StringBuilder builder = new StringBuilder();
+            boolean questionFound = false;
+            Question question = new Question();
             while (i < paragraphList.length) {
-                if (Parser.isQuestion(paragraphList[i])) {
+
+                if(Parser.isQuestion(paragraphList[i])) {
+                    questionFound = true;
+                    question = new Question();
+                }
+                else if(questionFound) {
+                    if (Parser.isOption(paragraphList[i], 'A')) {
+                        question.questionText = builder.toString();
+                        builder = new StringBuilder();
+                        builder.append(paragraphList[i].substring(paragraphList[i].indexOf("A.")));
+                    } else if (Parser.isOption(paragraphList[i], 'B')) {
+                        question.optionA = builder.toString();
+                        builder = new StringBuilder();
+                        builder.append(paragraphList[i].substring(paragraphList[i].indexOf("B.")));
+                    } else if (Parser.isOption(paragraphList[i], 'C')) {
+                        question.optionB = builder.toString();
+                        builder = new StringBuilder();
+                        builder.append(paragraphList[i].substring(paragraphList[i].indexOf("C.")));
+                    } else if (Parser.isOption(paragraphList[i], 'D')) {
+                        question.optionC = builder.toString();
+                        builder = new StringBuilder();
+                        builder.append(paragraphList[i].substring(paragraphList[i].indexOf("D.")));
+                    } else if (Parser.isOption(paragraphList[i], 'E')) {
+                        question.optionD = builder.toString();
+                        builder = new StringBuilder();
+                        builder.append(paragraphList[i].substring(paragraphList[i].indexOf("E.")));
+                    } else if (Parser.isOption(paragraphList[i], 'F')) {
+                        question.optionE = builder.toString();
+                        builder = new StringBuilder();
+                        builder.append(paragraphList[i].substring(paragraphList[i].indexOf("F.")));
+                    } else if (Parser.isCorrectAnswer(paragraphList[i])) {
+                        if (question.optionA.isEmpty()) question.optionA = builder.toString();
+                        else if (question.optionB.isEmpty()) question.optionB = builder.toString();
+                        else if (question.optionC.isEmpty()) question.optionC = builder.toString();
+                        else if (question.optionD.isEmpty()) question.optionD = builder.toString();
+                        else if (question.optionE.isEmpty()) question.optionE = builder.toString();
+                        else question.optionF = builder.toString();
+                        String newPara = paragraphList[i].trim();
+                        question.correctAnswer = newPara.substring(newPara.lastIndexOf(' '));
+                        questionFound = false;
+                        questions.add(question);
+                        builder = new StringBuilder();
+                    } else {
+                        builder.append(" ").append(paragraphList[i].trim());
+                    }
+                }
+                i++;
+
+
+
+
+
+
+                /*if (Parser.isQuestion(paragraphList[i])) {
                     Question question = new Question();
+
                     question.questionText = paragraphList[++i].trim(); // Next paragraph is the question text
                     i++;
 
@@ -64,7 +129,7 @@ public class Main {
                     questions.add(question);
                 } else {
                     i++;
-                }
+                }*/
             }
         }
 
