@@ -2,8 +2,14 @@ package org.example;
 
 public class Parser {
 
+    public static boolean startsWith(String str, String prefix) {
+        if (str.length() < prefix.length())
+            return false;
+        return str.substring(0, prefix.length()).equalsIgnoreCase(prefix);
+    }
     public static boolean isQuestion(String paragraph) {
-        return paragraph.trim().startsWith("Question");
+        paragraph = paragraph.replaceFirst("^\\s+", "");
+        return startsWith(paragraph, "question");
     }
 
     public static String extractQuestion(String paragraph) {
@@ -19,7 +25,7 @@ public class Parser {
     }
 
     public static boolean isOption(String paragraph, char c) {
-        return paragraph.trim().startsWith(c + ".");
+        return paragraph.trim().startsWith(c + ".") || paragraph.contains(" " + c + '.');
     }
 
     public static boolean isCorrectAnswer(String paragraph) {
