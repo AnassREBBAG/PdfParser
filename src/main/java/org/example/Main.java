@@ -13,6 +13,7 @@ public class Main {
 
         ArrayList<Question> questions = new ArrayList<>();
 
+        //try-catch
         try {
             questions = parsePDF(filePath);
         } catch (IOException e) {
