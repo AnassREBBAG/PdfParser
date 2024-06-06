@@ -9,7 +9,7 @@ public class Parser {
     }
     public static boolean isQuestion(String paragraph) {
         paragraph = paragraph.replaceFirst("^\\s+", "");
-        return startsWith(paragraph, "question");
+        return startsWith(paragraph, "question") || startsWith(paragraph, "NO.") ;
     }
 
     public static String extractQuestion(String paragraph) {
@@ -29,6 +29,6 @@ public class Parser {
     }
 
     public static boolean isCorrectAnswer(String paragraph) {
-        return paragraph.trim().startsWith("Correct Answer");
+        return paragraph.trim().startsWith("Correct Answer") || paragraph.contains("Answer");
     }
 }

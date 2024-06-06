@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        String filePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "GCP-229ques.pdf";
-
+        String filePath = "src/main/resources/test4.pdf";
         ArrayList<Question> questions = new ArrayList<>();
 
         //try-catch
@@ -28,17 +27,12 @@ public class Main {
         ArrayList<Question> questions = new ArrayList<>();
 
         try (PDDocument document = PDDocument.load(new File(filePath))) {
+
             PDFTextStripper pdfStripper = new PDFTextStripper();
+
             String text = pdfStripper.getText(document);
 
-
-            //System.out.println(text);
-
-
             String[] paragraphList = text.split("\n");
-
-            //for(int i=0; i < paragraphList.length; i++)
-              //  System.out.println(i + "  " + paragraphList[i]);
 
             int i = 0;
 
