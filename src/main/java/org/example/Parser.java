@@ -9,7 +9,7 @@ public class Parser {
     }
     public static boolean isQuestion(String paragraph) {
         paragraph = paragraph.replaceFirst("^\\s+", "");
-        return startsWith(paragraph, "question") || startsWith(paragraph, "NO.") ;
+        return startsWith(paragraph, "question") || startsWith(paragraph, "NO.") | (paragraph.contains(". ") && paragraph.contains("?")) ;
     }
 
     public static String extractQuestion(String paragraph) {
@@ -25,10 +25,10 @@ public class Parser {
     }
 
     public static boolean isOption(String paragraph, char c) {
-        return paragraph.trim().startsWith(c + ".") || paragraph.contains(" " + c + '.');
+        return paragraph.trim().startsWith(c + ".") || paragraph.contains(" " + c + '.') ;
     }
 
     public static boolean isCorrectAnswer(String paragraph) {
-        return paragraph.trim().startsWith("Correct Answer") || paragraph.contains("Answer");
+        return paragraph.trim().startsWith("Correct Answer") || paragraph.contains("Answer") || paragraph.contains("Correct answer");
     }
 }
