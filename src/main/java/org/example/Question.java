@@ -9,6 +9,7 @@ public class Question {
     public String optionF;
     public String correctAnswer;
     public String questionText;
+    public String questionType;
 
     public Question() {
         this.questionText = "";
@@ -18,6 +19,7 @@ public class Question {
         this.optionD = "";
         this.optionE = "";
         this.optionF = "";
+        this.questionType = "";
         this.correctAnswer = "";
     }
 
