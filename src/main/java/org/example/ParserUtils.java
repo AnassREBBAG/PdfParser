@@ -8,11 +8,10 @@ import java.nio.file.Files;
 
 public class ParserUtils {
 
-
-    public static String extractTextFromFile(String path){
+    public static String extractTextFromFile(String path) {
 
         try {
-      
+
             String text = Files.readString(Paths.get(path));
             return text;
 
@@ -24,14 +23,10 @@ public class ParserUtils {
 
     }
 
-
-
-    //todo : extract questions and write into csv file
-    public static void extractQuestions(String text){
+    // todo : extract questions and write into csv file
+    public static void extractQuestions(String text) {
 
         String[] lines = text.split("\n");
-
-
 
         boolean questionFound;
 
@@ -40,122 +35,95 @@ public class ParserUtils {
         int i = 0;
         while (i < lines.length) {
 
-
             if (lines[i].startsWith("Question")) {
                 i++;
                 questionFound = true;
 
                 q = new Question();
 
-                
-
-
             }
 
-            else if (lines[i].startsWith("A. ") ) {
-                while (! lines[i].startsWith("B. ")) {
-                    q.option1 = q.option1+ " " + lines[i];
+            else if (lines[i].startsWith("A. ")) {
+                while (!lines[i].startsWith("B. ")) {
+                    q.option1 = q.option1 + " " + lines[i];
                     i++;
-                    
-                }
-                
-            }
-
-            else if (lines[i].startsWith("B. ") ) {
-                while (! lines[i].startsWith("C. ")) {
-                    q.option2 = q.option2+ " " + lines[i];
-                    i++;
-                    
 
                 }
-                
+
             }
-            else if (lines[i].startsWith("C. ") ) {
-                while (! lines[i].startsWith("D. ")) {
-                    q.option3 = q.option3+ " " + lines[i];
+
+            else if (lines[i].startsWith("B. ")) {
+                while (!lines[i].startsWith("C. ")) {
+                    q.option2 = q.option2 + " " + lines[i];
                     i++;
-                    
 
                 }
-                
-            }
-            else if (lines[i].startsWith("D. ") ) {
-                while (! lines[i].startsWith("E. ")) {
-                    q.option4 = q.option4+ " " + lines[i];
+
+            } else if (lines[i].startsWith("C. ")) {
+                while (!lines[i].startsWith("D. ")) {
+                    q.option3 = q.option3 + " " + lines[i];
                     i++;
-                    
 
                 }
-                
-            }
-            else if (lines[i].startsWith("E. ") ) {
-                while (! lines[i].startsWith("F. ")) {
+
+            } else if (lines[i].startsWith("D. ")) {
+                while (!lines[i].startsWith("E. ")) {
+                    q.option4 = q.option4 + " " + lines[i];
+                    i++;
+
+                }
+
+            } else if (lines[i].startsWith("E. ")) {
+                while (!lines[i].startsWith("F. ")) {
                     q.option5 = q.option5 + " " + lines[i];
                     i++;
-                    
 
                 }
-                
+
             }
 
-            else if (lines[i].startsWith("F. ") ) {
-                while (! lines[i].startsWith("Correct Answer")) {
+            else if (lines[i].startsWith("F. ")) {
+                while (!lines[i].startsWith("Correct Answer")) {
                     q.option6 = q.option6 + " " + lines[i];
                     i++;
-                   
 
                 }
-                
+
             }
-
-
 
             else if (lines[i].startsWith("Correct Answer")) {
                 q.correctAnswer = lines[i];
                 i++;
-               
+
             }
 
             else if (lines[i].startsWith("Explanation")) {
-                
-                while (i < lines.length ) {
 
-                    if(lines[i].startsWith("Question")) break;
-                    else{
-                        q.overallExplanation = q.overallExplanation + " " +  lines[i];
-                        i++;}
+                while (i < lines.length) {
+
+                    if (lines[i].startsWith("Question"))
+                        break;
+                    else {
+                        q.overallExplanation = q.overallExplanation + " " + lines[i];
+                        i++;
+                    }
                 }
 
             }
 
-
-
-            else{
+            else {
                 q.questionText = q.questionText + " " + lines[i];
                 i++;
-                
 
             }
 
-
-            
-
-
-
-
-
         }
-            
+
     }
-
-
-
-    
-
 
     public static void createCSVFile(String fileName, String... headers) {
         try (FileWriter fileWriter = new FileWriter(fileName + ".csv")) {
-            
+
             for (int i = 0; i < headers.length; i++) {
                 fileWriter.append(headers[i]);
                 if (i < headers.length - 1) {
@@ -168,7 +136,6 @@ public class ParserUtils {
         }
     }
 
-    
     public static void writeToCSVFile(String fileName, String... data) {
         try (FileWriter fileWriter = new FileWriter(fileName, true)) {
             // Write the data to the CSV file
@@ -183,7 +150,5 @@ public class ParserUtils {
             e.printStackTrace();
         }
     }
-
-
 
 }

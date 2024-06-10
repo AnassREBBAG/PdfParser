@@ -19,11 +19,9 @@ public class Question {
     public String questionType;
     public String domain;
 
-
     public Question() {
 
         this.questionType = " ";
-
 
         this.questionText = " ";
 
@@ -33,16 +31,15 @@ public class Question {
         this.option2 = " ";
         this.explanation2 = " ";
 
-
         this.option3 = " ";
         this.explanation3 = " ";
-        
+
         this.option4 = " ";
         this.explanation4 = " ";
 
         this.option5 = " ";
         this.explanation5 = " ";
-        
+
         this.option6 = " ";
         this.explanation6 = " ";
 
@@ -53,19 +50,12 @@ public class Question {
 
     }
 
-
-
-
-
     @Override
-    public String toString(){
+    public String toString() {
         System.out.println("_______________________________");
-        return "new question : " + "\n" + this.questionText + this.option1 + this.option2 + this.option3 + this.option4 + this.option5 + this.option6 + this.correctAnswer + this.overallExplanation;
+        return "new question : " + "\n" + this.questionText + this.option1 + this.option2 + this.option3 + this.option4
+                + this.option5 + this.option6 + this.correctAnswer + this.overallExplanation;
 
     }
-
-    
-
-  
 
 }
