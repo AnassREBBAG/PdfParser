@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+
 import org.apache.poi.xslf.model.ParagraphPropertyFetcher.ParaPropFetcher;
 
 public class Main {
@@ -22,7 +24,20 @@ public class Main {
         ) ;
          
          
-         ParserUtils.extractQuestions(content);
+         //ParserUtils.extractQuestions(content).forEach(q -> System.out.println(q.toString()));
+
+        
+        List<Question> questions = ParserUtils.extractQuestions(content);
+
+        questions.forEach(q -> writeToCSVFile("Output.csv", q.questionText, "no type", 
+        q.option1, q.explanation1, 
+        q.option2, q.explanation2, 
+        q.option3, q.explanation3,
+        q.option4, q.explanation4, 
+        q.option5, q.explanation5, 
+        q.option6, q.explanation6,
+        q.correctAnswer, q.overallExplanation,
+        q.domain ));
 
 
     }

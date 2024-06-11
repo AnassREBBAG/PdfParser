@@ -60,8 +60,23 @@ public class Question {
     @Override
     public String toString(){
         System.out.println("_______________________________");
-        return "new question : " + "\n" + this.questionText + this.option1 + this.option2 + this.option3 + this.option4 + this.option5 + this.option6 + this.correctAnswer + this.overallExplanation;
+        return "new question : " + "_a_" + this.questionText + "_b_"  + this.option1 + "_c_"  + this.option2 + "_d_"  + this.option3 + "_e_"  + this.option4 + "_f_"  + this.option5 + "_g_"  + this.option6 + "_h_"  + this.correctAnswer + "_i_"  + this.overallExplanation ;
 
+    }
+
+
+    public String[] toCSVDataLine(){
+        return new String[] {this.questionText, "no type", 
+        this.option1, this.explanation1, 
+        this.option2, this.explanation2, 
+        this.option3, this.explanation3,
+        this.option4, this.explanation4, 
+        this.option5, this.explanation5, 
+        this.option6, this.explanation6,
+        this.correctAnswer, this.overallExplanation,
+        this.domain
+    
+    };
     }
 
     
