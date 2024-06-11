@@ -1,39 +1,27 @@
 package org.example;
 
 public class Question {
-    public String optionA;
-    public String optionB;
-    public String optionC;
-    public String optionD;
-    public String optionE;
-    public String optionF;
-    public String correctAnswer;
-    public String questionText;
-    public String questionType;
+    String questionText = "";
+    String option1 = "";
+    String option2 = "";
+    String option3 = "";
+    String option4 = "";
+    String option5 = "";
+    String option6 = "";
+    String correctAnswer = "";
+    String overallExplanation = "";
 
-    public Question() {
-        this.questionText = "";
-        this.optionA = "";
-        this.optionB = "";
-        this.optionC = "";
-        this.optionD = "";
-        this.optionE = "";
-        this.optionF = "";
-        this.questionType = "";
-        this.correctAnswer = "";
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" + '\n' +
-                "questionText='" + questionText + '\'' + '\n' +
-                "optionA='" + optionA + '\'' + '\n' +
-                "optionB='" + optionB + '\'' + '\n' +
-                "optionC='" + optionC + '\'' + '\n' +
-                "optionD='" + optionD + '\'' + '\n' +
-                "optionE='" + optionE + '\'' + '\n' +
-                "optionE='" + optionF + '\'' + '\n' +
-                "correctAnswer='" + correctAnswer + '\'' + '\n' +
-                '}' + '\n';
+    public String[] toCSVRow() {
+        return new String[] {
+                questionText,
+                option1,
+                option2,
+                option3,
+                option4,
+                option5,
+                option6,
+                correctAnswer,
+                overallExplanation
+        };
     }
 }
