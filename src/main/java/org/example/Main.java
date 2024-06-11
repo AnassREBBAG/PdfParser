@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("starting ..");
@@ -7,17 +9,17 @@ public class Main {
         String content = ParserUtils.extractTextFromFile("src/main/resources/IMPUTV2.txt");
 
         ParserUtils.createCSVFile("Output",
-                "Question", "QuestionType",
-                "Answer Option 1", "Explanation 1",
-                "Answer Option 2", "Explanation 2",
-                "Answer Option 3", "Explanation 3",
-                "Answer Option 4", "Explanation 4",
-                "Answer Option 5", "Explanation 5",
-                "Answer Option 6", "Explanation 6",
-                "Correct Answer", "Overall Explanation",
-                "Domain");
+                "Question",
+                " Option 1",
+                " Option 2",
+                " Option 3",
+                " Option 4",
+                " Option 5",
+                " Option 6",
+                "Correct Answer",
+                "Overall Explanation");
 
-        ParserUtils.extractQuestions(content);
-
+        List<Question> questions = ParserUtils.extractQuestions(content);
+        ParserUtils.writeToCSVFile("Output", questions);
     }
 }
