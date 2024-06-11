@@ -73,7 +73,7 @@ public class ParserUtils {
             } else if (line.startsWith("Correct Answer")) {
                 q.correctAnswer = line.split(":")[1].trim();
             } else if (line.startsWith("Explanation")) {
-                q.overallExplanation = "";
+                q.overallExplanation = line;
                 while (i + 1 < lines.length && !lines[i + 1].startsWith("Question")) {
                     q.overallExplanation += lines[++i].trim() + " ";
                 }
