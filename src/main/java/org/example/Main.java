@@ -7,19 +7,36 @@ public class Main {
         System.out.println("starting ..");
 
         String content = ParserUtils.extractTextFromFile("src/main/resources/IMPUTV2.txt");
+        
+        
 
-        ParserUtils.createCSVFile("Output",
-                "Question",
-                " Option 1",
-                " Option 2",
-                " Option 3",
-                " Option 4",
-                " Option 5",
-                " Option 6",
-                "Correct Answer",
-                "Overall Explanation");
+        ParserUtils.createCSVFile("Output", "Question", "QuestionType", 
+        "Answer Option 1", "Explanation 1",
+        "Answer Option 2", "Explanation 2",
+        "Answer Option 3", "Explanation 3",
+        "Answer Option 4", "Explanation 4",
+        "Answer Option 5", "Explanation 5",
+        "Answer Option 6", "Explanation 6",
+        "Correct Answer", "Overall Explanation",
+        "Domain"
+        ) ;
+         
+         
+         //ParserUtils.extractQuestions(content).forEach(q -> System.out.println(q.toString()));
 
+        
         List<Question> questions = ParserUtils.extractQuestions(content);
-        ParserUtils.writeToCSVFile("Output", questions);
+
+        questions.forEach(q -> ParserUtils.writeToCSVFile("Output.csv", q.questionText, "no type", 
+        q.option1, q.explanation1, 
+        q.option2, q.explanation2, 
+        q.option3, q.explanation3,
+        q.option4, q.explanation4, 
+        q.option5, q.explanation5, 
+        q.option6, q.explanation6,
+        q.correctAnswer, q.overallExplanation,
+        q.domain ));
+
+
     }
 }
