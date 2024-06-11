@@ -10,21 +10,33 @@ import java.nio.file.Files;
 
 public class ParserUtils {
 
+    public static String clean(String s) {
 
-
-    public static String clean(String s){
-
-        if (s == null) return "";
+        if (s == null)
+            return "";
         return s.replace(",", " ");
 
     }
 
+    public static String replaceUppercaseWithOrder(String input) {
+        if (input == null) {
+            return null;
+        }
 
+        StringBuilder result = new StringBuilder();
 
+        for (char c : input.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                // Calculate the alphabetical order (A=1, B=2, ..., Z=26)
+                int order = c - 'A' + 1;
+                result.append(order);
+            } else {
+                result.append(c);
+            }
+        }
 
-
-
-
+        return result.toString();
+    }
 
     public static String extractTextFromFile(String path) {
         try {
@@ -35,18 +47,15 @@ public class ParserUtils {
         return "";
     }
 
-
-public static List<Question> extractQuestions(String text) {
+    public static List<Question> extractQuestions(String text) {
         String[] lines = text.split("\n");
         List<Question> questions = new ArrayList<>();
         Question q = null;
 
+        for (int i = 0; i < lines.length; i++) {
+            lines[i] = clean(lines[i]);
 
-      for (int i = 0; i < lines.length; i++) {
-        lines[i] = clean(lines[i]);
-        
-      }
-
+        }
 
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i].trim();
@@ -78,12 +87,14 @@ public static List<Question> extractQuestions(String text) {
                 }
             } else if (line.startsWith("D. ")) {
                 q.option4 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("E. ") && !lines[i + 1].startsWith("Correct Answer")) {
+                while (i + 1 < lines.length && !lines[i + 1].startsWith("E. ")
+                        && !lines[i + 1].startsWith("Correct Answer")) {
                     q.option4 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("E. ")) {
                 q.option5 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("F. ") && !lines[i + 1].startsWith("Correct Answer")) {
+                while (i + 1 < lines.length && !lines[i + 1].startsWith("F. ")
+                        && !lines[i + 1].startsWith("Correct Answer")) {
                     q.option5 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("F. ")) {
@@ -92,9 +103,9 @@ public static List<Question> extractQuestions(String text) {
                     q.option6 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("Correct Answer")) {
-                q.correctAnswer = line.split(":")[1].trim();
+                q.correctAnswer = replaceUppercaseWithOrder(line.split(":")[1].trim());
             } else if (line.startsWith("Explanation")) {
-                q.overallExplanation = line;
+                q.overallExplanation = line.substring(12);
                 while (i + 1 < lines.length && !lines[i + 1].startsWith("Question")) {
                     q.overallExplanation += lines[++i].trim() + " ";
                 }
@@ -107,11 +118,6 @@ public static List<Question> extractQuestions(String text) {
 
         return questions;
     }
-
-
-
-    
-
 
     public static void createCSVFile(String fileName, String... headers) {
         try (FileWriter fileWriter = new FileWriter(fileName + ".csv")) {
@@ -127,10 +133,9 @@ public static List<Question> extractQuestions(String text) {
         }
     }
 
-    
     public static void writeToCSVFile(String fileName, String... data) {
         try (FileWriter fileWriter = new FileWriter(fileName, true)) {
-            
+
             for (int i = 0; i < data.length; i++) {
                 fileWriter.append(data[i]);
                 if (i < data.length - 1) {
