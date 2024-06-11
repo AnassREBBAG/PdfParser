@@ -24,8 +24,9 @@ public class Main {
         List<Question> questions = ParserUtils.extractQuestions(content);
 
         questions.forEach(QuestionType::setQuestionType);
+        questions.forEach(ParserUtils::formatCorrectAnswer);
 
-        questions.forEach(q -> ParserUtils.writeToCSVFile("Output.csv", q.questionText, "no type",
+        questions.forEach(q -> ParserUtils.writeToCSVFile("Output.csv", q.questionText, q.questionType,
                 q.option1, q.explanation1,
                 q.option2, q.explanation2,
                 q.option3, q.explanation3,
