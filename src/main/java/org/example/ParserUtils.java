@@ -147,4 +147,22 @@ public class ParserUtils {
             e.printStackTrace();
         }
     }
+
+    public static void formatCorrectAnswer(Question q) {
+
+        if (q.correctAnswer == null || q.correctAnswer.isEmpty()) {
+            return;
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < q.correctAnswer.length(); i++) {
+            result.append(q.correctAnswer.charAt(i));
+            if (i < q.correctAnswer.length() - 1) {
+                result.append('-');
+            }
+        }
+
+        q.correctAnswer = result.toString();
+    }
+
 }
