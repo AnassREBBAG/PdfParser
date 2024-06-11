@@ -10,6 +10,22 @@ import java.nio.file.Files;
 
 public class ParserUtils {
 
+
+
+    public static String clean(String s){
+
+        if (s == null) return "";
+        return s.replace(",", " ");
+
+    }
+
+
+
+
+
+
+
+
     public static String extractTextFromFile(String path) {
         try {
             return Files.readString(Paths.get(path));
@@ -24,6 +40,13 @@ public static List<Question> extractQuestions(String text) {
         String[] lines = text.split("\n");
         List<Question> questions = new ArrayList<>();
         Question q = null;
+
+
+      for (int i = 0; i < lines.length; i++) {
+        lines[i] = clean(lines[i]);
+        
+      }
+
 
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i].trim();
