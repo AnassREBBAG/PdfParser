@@ -77,6 +77,7 @@ public class ParserUtils {
                     && !lines[i + 1].startsWith("C. ")
                     && !lines[i + 1].startsWith("D. ")
                     && !lines[i + 1].startsWith("E. ")
+                    && !lines[i + 1].startsWith("F. ")
                     && !lines[i + 1].startsWith("Correct")) {
                     q.option1 += " " + lines[++i].trim();
                 }
@@ -85,6 +86,8 @@ public class ParserUtils {
                 while (i + 1 < lines.length 
                     && !lines[i + 1].startsWith("C. ") 
                     && !lines[i + 1].startsWith("D. ")
+                    && !lines[i + 1].startsWith("E. ")
+                    && !lines[i + 1].startsWith("F. ")
                     && !lines[i + 1].startsWith("Correct")) {
                     q.option2 += " " + lines[++i].trim();
                 }
@@ -93,13 +96,16 @@ public class ParserUtils {
                 while (i + 1 < lines.length 
                     && !lines[i + 1].startsWith("D. ")
                     && !lines[i + 1].startsWith("E. ")
+                    && !lines[i + 1].startsWith("F. ")
                     && !lines[i + 1].startsWith("Correct")) {
                     q.option3 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("D. ")) {
                 q.option4 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("E. ")
-                        && !lines[i + 1].startsWith("Correct Answer")) {
+                while (i + 1 < lines.length 
+                    && !lines[i + 1].startsWith("E. ")
+                    && !lines[i + 1].startsWith("F. ")
+                    && !lines[i + 1].startsWith("Correct Answer")) {
                     q.option4 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("E. ")) {
