@@ -16,8 +16,8 @@ Correct Answer:B and D
 Explanation: The SAP Fiori factsheet app Sales Quotations does not display information at the schedule line level, nor does it show key facts of the preceding inquiry. The key facts displayed at the top of the screen always belong to the actual quotation selected. Therefore, answers A and C are both incorrect, leaving us with B and D as the only two correct answers to this question.
 Question
 Which of the following statements are correct regarding alternative items in sales?
-A. True.
-B. False.
+A. True
+B. False
 Correct Answer:A 
 Explanation: You can offer your customer optional alternative materials by entering them directly below the item requested in both inquiries and quotations.
 Question
