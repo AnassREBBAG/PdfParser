@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("starting ..");
 
-        String content = ParserUtils.extractTextFromFile("src/main/resources/IMPUTV2.txt");
+        String content = ParserUtils.extractTextFromFile("src/main/resources/InputTest.txt");
 
         ParserUtils.createCSVFile("Output", "Question", "QuestionType",
                 "Answer Option 1", "Explanation 1",
