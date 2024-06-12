@@ -4,7 +4,7 @@ A. Inquiry → Quotation → Billing document → Sales order → Outbound deliv
 B. Quotation → Inquiry → Sales order → Outbound delivery
 C. Inquiry → Quotation → Sales order → Outbound delivery
 D. Sales order → Post goods issue → Outbound delivery → Billing document
-Correct Answer:C 
+Correct Answer:C and D
 Explanation: You cannot create a billing document before a sales order. Therefore, answer A is incorrect. You can create a quotation after an inquiry but not the other way around, which invalidates answer B. Post goods issue is always performed after the outbound delivery is created; thus, answer D is also incorrect. Only answer C remains as the correct answer, which is in line with the diagram shown earlier in Figure 9.1.
 Question
 Which of the following are key features of the SAP Fiori factsheet app Sales Quotations? (There are two correct answers.)

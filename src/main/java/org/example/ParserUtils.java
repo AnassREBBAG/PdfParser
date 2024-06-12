@@ -148,17 +148,40 @@ public class ParserUtils {
         }
     }
 
+
+    public static String keepOnlyDigits(String str) {
+        StringBuilder capitalLetters = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (Character.isDigit(ch)) {
+                capitalLetters.append(ch);
+            }
+        }
+
+        return capitalLetters.toString();
+    }
+
+
+
+
+
+
+
     public static void formatCorrectAnswer(Question q) {
 
         if (q.correctAnswer == null || q.correctAnswer.isEmpty()) {
             return;
         }
 
+        q.correctAnswer = keepOnlyDigits(q.correctAnswer);
+
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < q.correctAnswer.length(); i++) {
+
             result.append(q.correctAnswer.charAt(i));
             if (i < q.correctAnswer.length() - 1) {
-                result.append(' ');
+                result.append('*');
             }
         }
 
