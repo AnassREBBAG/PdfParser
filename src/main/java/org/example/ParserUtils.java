@@ -158,7 +158,7 @@ public class ParserUtils {
         for (int i = 0; i < q.correctAnswer.length(); i++) {
             result.append(q.correctAnswer.charAt(i));
             if (i < q.correctAnswer.length() - 1) {
-                result.append('-');
+                result.append('*');
             }
         }
 
