@@ -72,23 +72,40 @@ public class ParserUtils {
                 }
             } else if (line.startsWith("A. ")) {
                 q.option1 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("B. ")) {
+                while (i + 1 < lines.length 
+                    && !lines[i + 1].startsWith("B. ")
+                    && !lines[i + 1].startsWith("C. ")
+                    && !lines[i + 1].startsWith("D. ")
+                    && !lines[i + 1].startsWith("E. ")
+                    && !lines[i + 1].startsWith("F. ")
+                    && !lines[i + 1].startsWith("Correct")) {
                     q.option1 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("B. ")) {
                 q.option2 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("C. ")) {
+                while (i + 1 < lines.length 
+                    && !lines[i + 1].startsWith("C. ") 
+                    && !lines[i + 1].startsWith("D. ")
+                    && !lines[i + 1].startsWith("E. ")
+                    && !lines[i + 1].startsWith("F. ")
+                    && !lines[i + 1].startsWith("Correct")) {
                     q.option2 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("C. ")) {
                 q.option3 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("D. ")) {
+                while (i + 1 < lines.length 
+                    && !lines[i + 1].startsWith("D. ")
+                    && !lines[i + 1].startsWith("E. ")
+                    && !lines[i + 1].startsWith("F. ")
+                    && !lines[i + 1].startsWith("Correct")) {
                     q.option3 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("D. ")) {
                 q.option4 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("E. ")
-                        && !lines[i + 1].startsWith("Correct Answer")) {
+                while (i + 1 < lines.length 
+                    && !lines[i + 1].startsWith("E. ")
+                    && !lines[i + 1].startsWith("F. ")
+                    && !lines[i + 1].startsWith("Correct Answer")) {
                     q.option4 += " " + lines[++i].trim();
                 }
             } else if (line.startsWith("E. ")) {
