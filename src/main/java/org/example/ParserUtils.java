@@ -60,70 +60,70 @@ public class ParserUtils {
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i].trim();
 
-            if (line.startsWith("Question")) {
+            if (line.contains("Question")) {
                 if (q != null) {
                     questions.add(q);
                 }
                 q = new Question();
                 i++;
                 q.questionText = lines[i].trim();
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("A. ")) {
+                while (i + 1 < lines.length && !lines[i + 1].contains("A. ")) {
                     q.questionText += " " + lines[++i].trim();
                 }
-            } else if (line.startsWith("A. ")) {
+            } else if (line.contains("A. ")) {
                 q.option1 = line;
                 while (i + 1 < lines.length 
-                    && !lines[i + 1].startsWith("B. ")
-                    && !lines[i + 1].startsWith("C. ")
-                    && !lines[i + 1].startsWith("D. ")
-                    && !lines[i + 1].startsWith("E. ")
-                    && !lines[i + 1].startsWith("F. ")
-                    && !lines[i + 1].startsWith("Correct")) {
+                    && !lines[i + 1].contains("B. ")
+                    && !lines[i + 1].contains("C. ")
+                    && !lines[i + 1].contains("D. ")
+                    && !lines[i + 1].contains("E. ")
+                    && !lines[i + 1].contains("F. ")
+                    && !lines[i + 1].contains("Correct")) {
                     q.option1 += " " + lines[++i].trim();
                 }
-            } else if (line.startsWith("B. ")) {
+            } else if (line.contains("B. ")) {
                 q.option2 = line;
                 while (i + 1 < lines.length 
-                    && !lines[i + 1].startsWith("C. ") 
-                    && !lines[i + 1].startsWith("D. ")
-                    && !lines[i + 1].startsWith("E. ")
-                    && !lines[i + 1].startsWith("F. ")
-                    && !lines[i + 1].startsWith("Correct")) {
+                    && !lines[i + 1].contains("C. ") 
+                    && !lines[i + 1].contains("D. ")
+                    && !lines[i + 1].contains("E. ")
+                    && !lines[i + 1].contains("F. ")
+                    && !lines[i + 1].contains("Correct")) {
                     q.option2 += " " + lines[++i].trim();
                 }
-            } else if (line.startsWith("C. ")) {
+            } else if (line.contains("C. ")) {
                 q.option3 = line;
                 while (i + 1 < lines.length 
-                    && !lines[i + 1].startsWith("D. ")
-                    && !lines[i + 1].startsWith("E. ")
-                    && !lines[i + 1].startsWith("F. ")
-                    && !lines[i + 1].startsWith("Correct")) {
+                    && !lines[i + 1].contains("D. ")
+                    && !lines[i + 1].contains("E. ")
+                    && !lines[i + 1].contains("F. ")
+                    && !lines[i + 1].contains("Correct")) {
                     q.option3 += " " + lines[++i].trim();
                 }
-            } else if (line.startsWith("D. ")) {
+            } else if (line.contains("D. ")) {
                 q.option4 = line;
                 while (i + 1 < lines.length 
-                    && !lines[i + 1].startsWith("E. ")
-                    && !lines[i + 1].startsWith("F. ")
-                    && !lines[i + 1].startsWith("Correct Answer")) {
+                    && !lines[i + 1].contains("E. ")
+                    && !lines[i + 1].contains("F. ")
+                    && !lines[i + 1].contains("Correct Answer")) {
                     q.option4 += " " + lines[++i].trim();
                 }
-            } else if (line.startsWith("E. ")) {
+            } else if (line.contains("E. ")) {
                 q.option5 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("F. ")
-                        && !lines[i + 1].startsWith("Correct Answer")) {
+                while (i + 1 < lines.length && !lines[i + 1].contains("F. ")
+                        && !lines[i + 1].contains("Correct Answer")) {
                     q.option5 += " " + lines[++i].trim();
                 }
-            } else if (line.startsWith("F. ")) {
+            } else if (line.contains("F. ")) {
                 q.option6 = line;
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("Correct Answer")) {
+                while (i + 1 < lines.length && !lines[i + 1].contains("Correct Answer")) {
                     q.option6 += " " + lines[++i].trim();
                 }
-            } else if (line.startsWith("Correct Answer")) {
+            } else if (line.contains("Correct Answer")) {
                 q.correctAnswer = replaceUppercaseWithOrder(line.split(":")[1].trim());
-            } else if (line.startsWith("Explanation")) {
+            } else if (line.contains("Explanation")) {
                 q.overallExplanation = line.substring(12);
-                while (i + 1 < lines.length && !lines[i + 1].startsWith("Question")) {
+                while (i + 1 < lines.length && !lines[i + 1].contains("Question")) {
                     q.overallExplanation += lines[++i].trim() + " ";
                 }
             }
