@@ -27,7 +27,7 @@ public class ParserUtils {
 
         for (char c : input.toCharArray()) {
             if (Character.isUpperCase(c)) {
-                // Calculate the alphabetical order (A=1, B=2, ..., Z=26)
+                
                 int order = c - 'A' + 1;
                 result.append(order);
             } else {
